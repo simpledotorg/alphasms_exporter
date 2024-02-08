@@ -44,21 +44,21 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 }
 
 func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
-	resp, err := e.client.GetUserBalance()
+	apiResp, balanceData, err := e.client.GetUserBalance()
 	if err != nil {
 		// Handle error situation
 	}
 
-	balance, err := strconv.ParseFloat(resp.Data.Balance, 64)
+	balance, err := strconv.ParseFloat(balanceData.Balance, 64)
 	if err != nil {
 		// Handle error situation
 	}
 
 	e.balance.Set(balance)
-	e.error.Set(float64(resp.Error))
+	e.error.Set(float64(apiResp.Error))
 
 	// Convert date string to unix timestamp
-	t, err := time.Parse(time.RFC3339, resp.Data.Validity)
+	t, err := time.Parse(time.RFC3339, balanceData.Validity)
 	if err != nil {
 		// Handle error situation
 	}

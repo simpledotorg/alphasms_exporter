@@ -18,17 +18,27 @@ type BalanceElement struct {
 	Validity string `json:"validity"`
 }
 
-type BalanceResponse struct {
-	Error int            `json:"error"`
-	Msg   string         `json:"msg"`
-	Data  BalanceElement `json:"data"`
+type ApiResponse struct {
+	Error int             `json:"error"`
+	Msg   string          `json:"msg"`
+	Data  json.RawMessage `json:"data"`
 }
 
 // method to get user balance
-func (c *Client) GetUserBalance() (*BalanceResponse, error) {
-	result := &BalanceResponse{}
-	err := c.doRequest("/user/balance/", result)
-	return result, err
+func (c *Client) GetUserBalance() (*ApiResponse, *BalanceElement, error) {
+	apiResp := &ApiResponse{}
+	err := c.doRequest("/user/balance", apiResp)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var balanceData BalanceElement
+	err = json.Unmarshal(apiResp.Data, &balanceData)
+	if err != nil {
+		return apiResp, nil, err
+	}
+
+	return apiResp, &balanceData, nil
 }
 
 // common method to do request
