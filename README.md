@@ -51,6 +51,8 @@ This exporter provides the following metrics:
 - alphasms_user_balance_error: The current error code while connecting to api
 - alphasms_user_balance_validity: Validity date of balance amount
 
+Exporter will also include exporter specific metrics
+
 ## Adding More Metrics
 
 To expose more metrics from the AlphaSMS API, you can:
