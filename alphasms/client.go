@@ -57,7 +57,6 @@ func (c *Client) doRequest(path string, result interface{}) error {
 	}
 
 	err = json.Unmarshal(body, result)
-	fmt.Println("error", err)
 
 	return err
 }
