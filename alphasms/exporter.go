@@ -58,7 +58,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	e.error.Set(float64(apiResp.Error))
 
 	// Convert date string to unix timestamp
-	t, err := time.Parse(time.RFC3339, balanceData.Validity)
+	t, err := time.Parse("2006-01-02 00:00:00", balanceData.Validity)
 	if err != nil {
 		// Handle error situation
 	}
