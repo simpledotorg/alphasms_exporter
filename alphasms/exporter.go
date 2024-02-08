@@ -1,6 +1,7 @@
 package alphasms
 
 import (
+	"log"
 	"strconv"
 	"time"
 
@@ -46,12 +47,12 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	apiResp, balanceData, err := e.client.GetUserBalance()
 	if err != nil {
-		// Handle error situation
+		log.Printf("Failed to get GetUserBalance: %v\n", err)
 	}
 
 	balance, err := strconv.ParseFloat(balanceData.Balance, 64)
 	if err != nil {
-		// Handle error situation
+		log.Printf("Failed to parse balance string: %v\n", err)
 	}
 
 	e.balance.Set(balance)
@@ -60,7 +61,7 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	// Convert date string to unix timestamp
 	t, err := time.Parse("2006-01-02 00:00:00", balanceData.Validity)
 	if err != nil {
-		// Handle error situation
+		log.Printf("Failed to parse date string: %v\n", err)
 	}
 
 	e.date.Set(float64(t.Unix()))
