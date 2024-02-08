@@ -11,7 +11,7 @@ image:
   tag: "latest"
 
 existingSecrete:
-  name: "alphasms-secret"
+  name: "alphasms-secrets"
   key: "api-key"
  
 imagePullSecrets: []
