@@ -1,6 +1,7 @@
 package alphasms
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -48,11 +49,16 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 		// Handle error situation
 	}
 
-	e.balance.Set(resp.Balance)
+	balance, err := strconv.ParseFloat(resp.Data.Balance, 64)
+	if err != nil {
+		// Handle error situation
+	}
+
+	e.balance.Set(balance)
 	e.error.Set(float64(resp.Error))
 
 	// Convert date string to unix timestamp
-	t, err := time.Parse(time.RFC3339, resp.Date)
+	t, err := time.Parse(time.RFC3339, resp.Data.Validity)
 	if err != nil {
 		// Handle error situation
 	}

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -9,7 +11,12 @@ import (
 )
 
 func main() {
-	client := alphasms.Client{APIKey: "yourapikey"}
+	apikey := os.Getenv("ALPHASMS_API_KEY")
+	if apikey == "" {
+		log.Fatalf("Failed to load ALPHASMS_API_KEY from environment variable")
+	}
+
+	client := alphasms.Client{APIKey: apikey}
 
 	exporter := alphasms.NewExporter(&client)
 	prometheus.MustRegister(exporter)
