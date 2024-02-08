@@ -20,18 +20,18 @@ func NewExporter(client *Client) *Exporter {
 		client: client,
 		balance: prometheus.NewGauge(prometheus.GaugeOpts{
 			Namespace: "alphasms",
-			Name:      "balance_amount",
+			Name:      "user_balance_amount",
 			Help:      "The current balance amount.",
 		}),
 		error: prometheus.NewGauge(prometheus.GaugeOpts{
 			Namespace: "alphasms",
-			Name:      "error",
-			Help:      "The current error code.",
+			Name:      "user_balance_error",
+			Help:      "The current error code while connecting to api.",
 		}),
 		date: prometheus.NewGauge(prometheus.GaugeOpts{
 			Namespace: "alphasms",
-			Name:      "date",
-			Help:      "The last successful call date.",
+			Name:      "user_balance_validity",
+			Help:      "Validity date of balance amount.",
 		}),
 	}
 }
