@@ -20,6 +20,12 @@ fullnameOverride: ""
 
 podAnnotations: {}
 
+serviceAnnotations: {
+  prometheus.io/path: /metrics,
+  prometheus.io/port: '8080',
+  prometheus.io/scrape: 'true'
+}
+
 podSecurityContext: {}
   # fsGroup: 2000
 
