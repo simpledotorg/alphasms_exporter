@@ -12,5 +12,10 @@ type BalanceResponse struct {
 
 func (c *Client) GetUserBalance() (*BalanceResponse, error) {
 	// Implement AlphaSMS API call here
-	return nil, nil
+	println("hello, getting a call...")
+	return &BalanceResponse{
+		Balance: 7945.6100,
+		Error:   0,
+		Date:    "2024-08-16 00:00:00",
+	}, nil
 }
