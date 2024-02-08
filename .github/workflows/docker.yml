@@ -25,4 +25,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: simpledotorg/alphasms_exporter:$GITHUB_SHA
+          image: simpledotorg/alphasms_exporter
+          tags: latest
