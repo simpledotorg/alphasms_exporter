@@ -2,6 +2,11 @@
 
 A Prometheus exporter that exposes metrics from the AlphaSMS API.
 
+
+> [!WARNING]  
+> This project is for **testing and educational purposes only**. Comprehensive error handling and tests are intentionally omitted from this project. 
+> Please **DO NOT** use this in production without adding thorough error checking, proper logging, and comprehensive unit tests. Using code without adequate error handling and tests can cause unexpected behavior and may lead to security vulnerabilities.
+
 ## Local setup
 
 1. Clone this repository.
